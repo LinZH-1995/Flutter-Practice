@@ -84,28 +84,42 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              constraints: BoxConstraints(minHeight: deviceWidth),
-              width: deviceWidth,
-              child: Image.network(
-                'https://apod.nasa.gov/apod/image/2209/WaterlessEarth2_woodshole_2520.jpg',
-                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print('123');
-              },
-              child: const Text('加入最愛'),
+            Stack(
+              children: [
+                Container(
+                  constraints: BoxConstraints(minHeight: deviceWidth),
+                  width: deviceWidth,
+                  child: Image.network(
+                    'https://apod.nasa.gov/apod/image/2209/WaterlessEarth2_woodshole_2520.jpg',
+                    loadingBuilder:
+                        (
+                          BuildContext context,
+                          Widget child,
+                          ImageChunkEvent? loadingProgress,
+                        ) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                  ),
+                ),
+                Positioned(
+                  top: 10.0,
+                  right: 10.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print('123');
+                    },
+                    child: const Text('加入最愛'),
+                  ),
+                ),
+              ],
             ),
             const Text(
               '''How much of planet Earth is made of water? Very little, actually.
@@ -125,7 +139,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: '月曆'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: '月曆',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '主頁'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
         ],
