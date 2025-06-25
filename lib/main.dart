@@ -35,10 +35,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pageList = [
-    const CalendarPage(),
-    const MainPage(),
-    const FavoritePage(),
+  final List<Map<String, dynamic>> _pageList = [
+    {'title': '月曆', 'widget': const CalendarPage()},
+    {'title': '今日照片', 'widget': const MainPage()},
+    {'title': '設定', 'widget': const FavoritePage()},
   ];
 
   void _onItemTapped(int index) {
@@ -52,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Center(child: Text(widget.title)),
+        title: Center(child: Text(_pageList[_selectedIndex]['title'])),
       ),
-      body: _pageList[_selectedIndex],
+      body: _pageList[_selectedIndex]['widget'],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
