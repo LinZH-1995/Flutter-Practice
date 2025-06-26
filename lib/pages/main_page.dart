@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_application/models/apod_data.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -8,9 +13,61 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final String apodUrl = 'https://api.nasa.gov/planetary/apod';
+  final String apiKey = dotenv.get('API_KEY');
+  Future<Object?>? _data;
+
+  @override
+  void initState() {
+    _data = _fetchDailyApodData(); // 在頁面生成時取得APOD 資訊
+    super.initState();
+  }
+
+  Future<ApodData?> _fetchDailyApodData() async {
+    try {
+      Uri url = Uri.parse('$apodUrl?api_key=$apiKey&thumbs=true');
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+      );
+      final parsedResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      return ApodData.fromJson(parsedResponse);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    Size deviceScreen = MediaQuery.of(context).size;
     double deviceWidth = MediaQuery.of(context).size.width;
+
+    return SingleChildScrollView(
+      child: FutureBuilder(
+        future: _data,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                '頁面載入錯誤',
+                style: TextStyle(color: Colors.red, fontSize: 30),
+              ),
+            );
+          }
+          if (snapshot.hasData) {}
+
+          return SizedBox(
+            height: deviceScreen.height,
+            width: deviceScreen.width,
+            child: const Center(child: CircularProgressIndicator()),
+          );
+        },
+      ),
+    );
 
     return SingleChildScrollView(
       child: Column(

@@ -35,8 +35,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-
+  int _selectedIndex = 1;
+  
   final List<Map<String, dynamic>> _pageList = [
     {'title': '月曆', 'widget': const CalendarPage()},
     {'title': '今日照片', 'widget': const MainPage()},
