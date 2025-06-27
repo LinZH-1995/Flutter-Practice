@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application/models/apod_data.dart';
-
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -19,7 +18,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    _data = _fetchDailyApodData(); // 在頁面生成時取得APOD 資訊
+    // 在頁面生成時取得APOD 資訊
+    _data = _fetchDailyApodData();
     super.initState();
   }
 
@@ -39,7 +39,6 @@ class _MainPageState extends State<MainPage> {
       throw Exception(e);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
