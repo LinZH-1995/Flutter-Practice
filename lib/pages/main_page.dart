@@ -52,8 +52,6 @@ class _MainPageState extends State<MainPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             ApodData? data = snapshot.data;
-            // Null data;
-            print(data);
             return Column(
               children: <Widget>[
                 Padding(
@@ -112,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                         onPressed: () {
                           print('add to favorite');
                         },
-                        child: const Text('加入最愛'),
+                        child: Icon(Icons.favorite, color: Colors.red)
                       ),
                     ),
                   ],
