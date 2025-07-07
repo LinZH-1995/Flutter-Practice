@@ -61,9 +61,25 @@ class Frog extends StatelessWidget {
 ```
 ---
 ### StatefulWidget - 有狀態組件
-- StatefulWidget可以在App內無限次的被重繪集及更新狀態，它是mutable，需要重繪時可以調用setState()，去標記自己為dirty狀態，為下次更新做準備。
-- 常見widget：**Radio**、**Form**、**Checkbox**
+- 是一種 有狀態 (stateful) 的 widget。它可以在生命週期內改變其狀態 (state)，並且當狀態變化時，會自動重新 build UI 來反映這些變化。
+- 包含兩部分：
+1. StatefulWidget 本身 ➝ 不會變，類似殼
+2. State 物件 ➝ 儲存可以變動的資料
+- 用途: 點擊按鈕更新數字（計數器）、表單輸入（輸入框、驗證）、切換開關（Switch、Checkbox）、 動畫控制（動畫播放暫停）
 
+| 常見widget              | 用途說明                                    |
+| ----------------------- | -------------------------------------------|
+| **TextField**           | 用來輸入文字，會隨著輸入內容更新顯示          |
+| **Checkbox**            | 勾選框，勾選/取消勾選會改變狀態               |
+| **Switch**              | 開關按鈕，切換開/關狀態                      |
+| **Slider**              | 滑動條，拖動時數值會變                       |
+| **AnimatedContainer**   | 支援動畫的 Container（屬性變化會自動過渡動畫）|
+| **PageView**            | 可左右滑動切換頁面                          |
+| **Form**                | 表單元件，內部可以管理多個輸入欄位的狀態      |
+| **RefreshIndicator**    | 下拉刷新組件，可顯示刷新動畫                 |
+| **BottomNavigationBar** | 底部導航欄，可以點擊切換不同的 tab           |
+| **TabBarView**          | 搭配 TabBar 使用，切換不同頁籤              |
+| **Radio**               | 單選按鈕，用來讓使用者 從一組選項中選擇一個。 |
 ```
 import 'package:flutter/material.dart';
 
