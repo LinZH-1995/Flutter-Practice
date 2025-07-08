@@ -60,7 +60,7 @@ class Frog extends StatelessWidget {
 }
 ```
 ---
-### StatefulWidget - 有狀態組件
+### [StatefulWidget - 有狀態組件](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
 - 是一種 有狀態 (stateful) 的 widget。它可以在生命週期內改變其狀態 (state)，並且當狀態變化時，會自動重新 build UI 來反映這些變化。
 - 包含兩部分：
 1. StatefulWidget 本身 ➝ 不會變，類似殼
@@ -115,5 +115,25 @@ class _BirdState extends State<Bird> {
 }
 ```
 ---
-### SingleChildScrollView
-
+### [SingleChildScrollView - 一個可以捲動單一小部件的方塊組件](https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html)
+- 是一個可以讓「單一子 widget」變得 可滾動 的容器。
+- 只容納一個 child，不支援多child widget。
+- 注意事項:
+1. 高度無限制 (如果 child 是 Column，且 Column 的內容超過螢幕，必須避免「無限高度」錯誤。)
+2. 不適合大量資料 (如果要顯示長列表，建議用 [ListView](#listview)，因為它支援懶加載。)
+```
+SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: Row(
+    children: List.generate(10, (index) => Container(
+      width: 100,
+      height: 100,
+      margin: EdgeInsets.all(8),
+      color: Colors.blue,
+      child: Center(child: Text('Box $index')),
+    )),
+  ),
+)
+```
+---
+### ListView
